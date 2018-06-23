@@ -19,7 +19,7 @@ $("#add-user").on("click", function (event) {
         role: $('#role-input').val().trim(),
         date: $('#date-input').val().trim(),
         rate: $('#rate-input').val().trim(),
-        // dateAdded: database.ServerValue.TIMESTAMP
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
 
     })
 
@@ -46,3 +46,12 @@ database.ref().on("child_added", function(snapshot) {
 
     $("#table-body").append(tableRow);
 })
+
+// var randomDate = "02/22/1999";
+// var randomFormat = "MM/DD/YYY";
+// var convertedDate = moment (randomDate, randomFormat)
+// moment(convertedDate).format("MM/DD/YY")); - to convert the randomDate into other date formats
+// moment(convertedDate).format("MMM Do, YYYY hh:mm:ss");
+// moment() - gives current date in time
+// moment(convertedDate).diff(moment(), "months") - determines time in months
+// 
