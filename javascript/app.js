@@ -43,6 +43,6 @@ database.ref().on("child_added", function(snapshot) {
     tableRow.append(roleCell);
     tableRow.append(startDateCell);
     tableRow.append(rateCell);
-    
+
     $("#table-body").append(tableRow);
 })
