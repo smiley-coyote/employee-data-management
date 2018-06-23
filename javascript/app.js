@@ -19,7 +19,7 @@ $("#add-user").on("click", function (event) {
         role: $('#role-input').val().trim(),
         date: $('#date-input').val().trim(),
         rate: $('#rate-input').val().trim(),
-        // dateAdded: database.ServerValue.TIMESTAMP
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
 
     })
 
@@ -28,11 +28,17 @@ $("#add-user").on("click", function (event) {
 })
 database.ref().on("child_added", function(snapshot) {
 
+    //console.log(currentDate);
+    var startDate = moment(snapshot.val().date, 'YYYY/MM/DD');
+    console.log(startDate);
+
     var tableRow = $("<tr>");
     var nameCell = $("<td>");
     var roleCell = $("<td>");
     var startDateCell = $("<td>");
+    var monthsWorked = moment().diff(moment(startDate), 'months');
     var rateCell = $("<td>");
+    var totalBilled = monthsWorked * snapshot.val().rate;
 
     nameCell.text(snapshot.val().name);
     roleCell.text(snapshot.val().role);
@@ -42,7 +48,12 @@ database.ref().on("child_added", function(snapshot) {
     tableRow.append(nameCell);
     tableRow.append(roleCell);
     tableRow.append(startDateCell);
+    tableRow.append(monthsWorked);
     tableRow.append(rateCell);
+    tableRow.append(totalBilled);
     
     $("#table-body").append(tableRow);
 })
+
+
+//moment(randomDate, randomFormat)
