@@ -28,11 +28,17 @@ $("#add-user").on("click", function (event) {
 })
 database.ref().on("child_added", function(snapshot) {
 
+    //console.log(currentDate);
+    var startDate = moment(snapshot.val().date, 'YYYY/MM/DD');
+    console.log(startDate);
+
     var tableRow = $("<tr>");
     var nameCell = $("<td>");
     var roleCell = $("<td>");
     var startDateCell = $("<td>");
+    var monthsWorked = moment().diff(moment(startDate), 'months');
     var rateCell = $("<td>");
+    var totalBilled = monthsWorked * snapshot.val().rate;
 
     nameCell.text(snapshot.val().name);
     roleCell.text(snapshot.val().role);
@@ -42,16 +48,17 @@ database.ref().on("child_added", function(snapshot) {
     tableRow.append(nameCell);
     tableRow.append(roleCell);
     tableRow.append(startDateCell);
+    tableRow.append(monthsWorked);
     tableRow.append(rateCell);
+
 
     $("#table-body").append(tableRow);
 })
 
-// var randomDate = "02/22/1999";
-// var randomFormat = "MM/DD/YYY";
-// var convertedDate = moment (randomDate, randomFormat)
-// moment(convertedDate).format("MM/DD/YY")); - to convert the randomDate into other date formats
-// moment(convertedDate).format("MMM Do, YYYY hh:mm:ss");
-// moment() - gives current date in time
-// moment(convertedDate).diff(moment(), "months") - determines time in months
-// 
+    tableRow.append(totalBilled);
+    
+    $("#table-body").append(tableRow);
+})
+
+
+
