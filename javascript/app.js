@@ -50,10 +50,15 @@ database.ref().on("child_added", function(snapshot) {
     tableRow.append(startDateCell);
     tableRow.append(monthsWorked);
     tableRow.append(rateCell);
+
+
+    $("#table-body").append(tableRow);
+})
+
     tableRow.append(totalBilled);
     
     $("#table-body").append(tableRow);
 })
 
 
-//moment(randomDate, randomFormat)
+
