@@ -13,7 +13,7 @@ var database = firebase.database();
 
 $("#add-user").on("click", function (event) {
     event.preventDefault();
-    
+
     database.ref().push({
         name: $('#name-input').val().trim(),
         role: $('#role-input').val().trim(),
@@ -21,5 +21,7 @@ $("#add-user").on("click", function (event) {
         rate: $('#rate-input').val().trim()
 
     })
+
+    $('#theForm')[0].reset();
 
 })
