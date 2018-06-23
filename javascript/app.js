@@ -27,15 +27,22 @@ $("#add-user").on("click", function (event) {
 
 })
 database.ref().on("child_added", function(snapshot) {
+
     var tableRow = $("<tr>");
-    var tableData = $("<td>");
-    tableData.text(snapshot.val().name);
-    tableRow.append(tableData);
-    tableData.text(snapshot.val().role);
-    tableRow.append(tableData);
-    tableData.text(snapshot.val().date);
-    tableRow.append(tableData);
-    tableData.text(snapshot.val().rate);
-    tableRow.append(tableData);
+    var nameCell = $("<td>");
+    var roleCell = $("<td>");
+    var startDateCell = $("<td>");
+    var rateCell = $("<td>");
+
+    nameCell.text(snapshot.val().name);
+    roleCell.text(snapshot.val().role);
+    startDateCell.text(snapshot.val().date);
+    rateCell.text(snapshot.val().rate);
+    
+    tableRow.append(nameCell);
+    tableRow.append(roleCell);
+    tableRow.append(startDateCell);
+    tableRow.append(rateCell);
+    
     $("#table-body").append(tableRow);
 })
